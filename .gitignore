@@ -1,0 +1,16 @@
+*.swp
+*.swo
+*.db
+*.pyc
+.DS_Store
+pip-log.txt
+.pydevproject
+.project
+.settings
+local_settings.py
+.project
+env
+.idea
+static/CACHE
+.sass-cache/
+*.scssc
