@@ -1,0 +1,68 @@
+	// Responsive Layout:
+	// The layout is based on the maia grid. We provide a variable
+	// column width based on the viewport. Viewport sizes are divided into 5 sizes:
+
+	// 	tiny: handheld portrait
+	// 	small: handheld landscape
+	// 	medium: tablet portrait
+	// 	large: tablet landscape and desktop
+
+	// The layouts change depending on which of the above viewport modes we are in.
+	// Layout queues are written into css by coding:
+
+	// @import respond-to(tiny) {
+	// 	//css here
+	// }
+
+	// The above declaration will only apply to screen siezs that are for the tiny
+	// viewport sizes. You can also specify a range of viewport sizes like this:
+
+	// @import respond-to(medium wide) {
+	// 	// css here
+	// }
+
+	// The above declaration will apply the given css to the whole range of viewports
+	// vetween medium and wide.
+
+	// There is also a default viewport which is used if media queries are not
+	// supported by the browser. This is currently medium.
+
+	// note: If an error is thrown in here, make sure sass 3.2 is installed.
+
+$breaks: 320px,480px,768px,978px,none;
+$break_groups: tiny,1,2,small,2,3,medium,3,4,large,4,5;
+$default_group: large;
+
+@mixin respond-to($groups) {
+	$min-index: length($breaks);
+	$max-index: 1;
+
+	@each $group in $groups {
+		@for $i from 1 through length($break_groups) {
+			@if nth($break_groups, $i) == $group {
+				@if nth($break_groups, $i + 1) < $min-index {
+					$min-index: nth($break_groups, $i + 1);
+				}
+
+				@if nth($break_groups, $i + 2) > $max-index {
+					$max-index: nth($break_groups, $i + 2);
+				}
+			}
+		}
+	}
+
+	@if $min-index < $max-index {
+		@if $groups == $default_group {
+			@content;
+		}
+		@else if $min-index == 1 and $max-index < length($breaks) {
+			@media only screen and (max-width: nth($breaks, $max-index) - 1) { @content; }
+		}
+		@else if $max-index == length($breaks) {
+			@media only screen and (min-width: nth($breaks, $min-index)) { @content; }
+		}
+		@else {
+			@media only screen and (min-width: nth($breaks, $min-index)) and (max-width: nth($breaks, $max-index) - 1) { @content; }
+		}
+	}
+}

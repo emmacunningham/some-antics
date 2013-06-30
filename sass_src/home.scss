@@ -1,0 +1,31 @@
+/**
+ *
+ * SASS structure adapted from CJ Cenizal (cj@cenizal.com)
+ *
+ * @author Emma Cunningham
+ */
+
+/*-----------------------------
+/*---- VENDOR DEPENDENCIES ----
+-----------------------------*/
+
+@import "compass";				    // Mixins, duh: http://compass-style.org
+@import "vendor/susy"; 				// Responsive grid: http://susy.oddbird.net/
+@import "vendor/normalize";		// CSS reset: https://github.com/JohnAlbin/normalize.css-with-sass-or-compass
+
+/*-----------------------------
+/*--- CUSTOM DEPENDENCIES -----
+-----------------------------*/
+
+/* Global */
+@import "base";
+@import "authored/structural/normalize";
+@import "authored/structural/grid";
+@import "authored/structural/type";
+
+
+/* Site-wide UI */
+
+
+/* Page content */
+@import "authored/content/home";
